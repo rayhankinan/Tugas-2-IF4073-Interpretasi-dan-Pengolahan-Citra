@@ -57,5 +57,15 @@ classdef GrayscaleImageWrapper < wrappers.BaseImageWrapper
             
             imageData = utils.Convolution.DoFunctionConvolution(obj.ImageData, lambda, regionSize);
         end
+        
+        % Get Frequency Convolution
+        function imageData = GetFrequencyConvolution(obj, matrix)
+            arguments
+                obj wrappers.GrayscaleImageWrapper
+                matrix double;
+            end % arguments
+            
+            imageData = utils.Convolution.DoFrequencyConvolution(obj.ImageData, matrix);
+        end
     end
 end

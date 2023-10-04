@@ -65,5 +65,19 @@ classdef ColoredImageWrapper < wrappers.BaseImageWrapper
             
             imageData = cat(3, redChan, greenChan, blueChan);
         end
+        
+        % Get Frequency Convolution
+        function imageData = GetFrequencyConvolution(obj, matrix)
+            arguments
+                obj wrappers.ColoredImageWrapper
+                matrix double;
+            end % arguments
+            
+            redChan = utils.Convolution.DoFrequencyConvolution(obj.ImageData(:,:,1), matrix);
+            greenChan = utils.Convolution.DoFrequencyConvolution(obj.ImageData(:,:,2), matrix);
+            blueChan = utils.Convolution.DoFrequencyConvolution(obj.ImageData(:,:,3), matrix);
+            
+            imageData = cat(3, redChan, greenChan, blueChan);
+        end
     end
 end

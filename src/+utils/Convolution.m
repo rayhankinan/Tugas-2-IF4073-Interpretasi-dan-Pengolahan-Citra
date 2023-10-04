@@ -95,14 +95,20 @@ classdef Convolution
                 matrix double
             end % arguments
             
+            % Convert to double
+            doubleImageData = im2double(imageData);
+            
             % Convert to frequency domain
-            freqImageData = fft2(imageData);
+            freqImageData = fft2(doubleImageData);
             
             % Apply the matrix
             processedImageData = freqImageData .* matrix;
             
             % Convert to spatial domain
-            resultData = ifft2(processedImageData);
+            processedDoubleData = ifft2(processedImageData);
+            
+            % Convert to uint8
+            resultData = im2uint8(processedDoubleData);
         end
     end
 end
