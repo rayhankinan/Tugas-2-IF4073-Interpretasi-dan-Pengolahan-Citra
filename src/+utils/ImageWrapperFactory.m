@@ -11,5 +11,5 @@ classdef ImageWrapperFactory
                 wrapper = wrappers.GrayscaleImageWrapper(imageData);
             end
         end
-    end % static methods
+    end
 end

@@ -45,7 +45,7 @@ classdef GrayscaleImageWrapper < wrappers.BaseImageWrapper
             end % arguments
             
             imageData = utils.Convolution(obj.ImageData, matrix);
-        end % function
+        end
         
         % Get Brightened Image
         function imageData = GetBrightened(obj, value)
