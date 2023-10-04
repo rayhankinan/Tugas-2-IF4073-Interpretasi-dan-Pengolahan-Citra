@@ -36,5 +36,15 @@ classdef ColoredImageWrapper < wrappers.BaseImageWrapper
             
             type = obj.Type;
         end
+        
+        % Brighten Image
+        function imageData = Brighten(obj, value)
+            arguments
+                obj wrappers.ColoredImageWrapper
+                value double;
+            end
+            
+            % TODO: Do something with the obj.ImageData
+        end
     end
 end

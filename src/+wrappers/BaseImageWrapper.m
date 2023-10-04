@@ -13,5 +13,8 @@ classdef (Abstract) BaseImageWrapper
         
         % Get Image Type
         GetType(obj)
+        
+        % Brighten Image
+        Brighten(obj, value)
     end
 end
