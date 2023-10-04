@@ -22,5 +22,8 @@ classdef (Abstract) BaseImageWrapper
         
         % Get Frequency Convolution
         GetFrequencyConvolution(obj, matrix)
+        
+        % Get Image Brightening
+        GetBrightening(obj, highpass, alpha)
     end
 end

@@ -67,5 +67,16 @@ classdef GrayscaleImageWrapper < wrappers.BaseImageWrapper
             
             imageData = utils.Convolution.DoFrequencyConvolution(obj.ImageData, matrix);
         end
+        
+        % Get Image Brightening
+        function imageData = GetBrightening(obj, highpass, alpha)
+            arguments
+                obj wrappers.GrayscaleImageWrapper
+                highpass double
+                alpha(1, 1) double
+            end % arguments
+            
+            imageData =  utils.Brighten.GetHighBoostg(obj.ImageData, highpass, alpha);
+        end
     end
 end

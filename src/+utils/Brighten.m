@@ -7,7 +7,14 @@ classdef Brighten
                 alpha(1, 1) double
             end
             
-            resultData = (alpha - 1) * imageData + highpass;
+            % Get double of image data
+            doubleImageData = im2double(imageData);
+            
+            % Calculate the high boost
+            doubleImageDataProcessed = (alpha - 1) * doubleImageData + highpass;
+            
+            % Convert back to uint8
+            resultData = im2uint8(doubleImageDataProcessed);
         end
     end
 end

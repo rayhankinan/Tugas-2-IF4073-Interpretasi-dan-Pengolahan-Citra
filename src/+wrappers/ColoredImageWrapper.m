@@ -79,5 +79,20 @@ classdef ColoredImageWrapper < wrappers.BaseImageWrapper
             
             imageData = cat(3, redChan, greenChan, blueChan);
         end
+        
+        % Get Image Brightening
+        function imageData = GetBrightening(obj, highpass, alpha)
+            arguments
+                obj wrappers.ColoredImageWrapper
+                highpass double
+                alpha(1, 1) double
+            end % arguments
+            
+            redChan = utils.Brighten.GetHighBoost(obj.ImageData(:,:,1), highpass(:,:,1), alpha);
+            greenChan = utils.Brighten.GetHighBoost(obj.ImageData(:,:,2), highpass(:,:,2), alpha);
+            blueChan = utils.Brighten.GetHighBoost(obj.ImageData(:,:,3), highpass(:,:,3), alpha);
+            
+            imageData = cat(3, redChan, greenChan, blueChan);
+        end
     end
 end
