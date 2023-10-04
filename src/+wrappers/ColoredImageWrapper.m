@@ -37,8 +37,8 @@ classdef ColoredImageWrapper < wrappers.BaseImageWrapper
             type = obj.Type;
         end
         
-        % Brighten Image
-        function imageData = Brighten(obj, value)
+        % Get Brightened Image
+        function imageData = GetBrightened(obj, value)
             arguments
                 obj wrappers.ColoredImageWrapper
                 value double;
