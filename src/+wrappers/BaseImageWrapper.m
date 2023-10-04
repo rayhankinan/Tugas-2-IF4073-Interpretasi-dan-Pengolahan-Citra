@@ -19,5 +19,8 @@ classdef (Abstract) BaseImageWrapper
         
         % Get Function Convolution
         GetFunctionConvolution(obj, lambda, regionSize)
+        
+        % Get Frequency Convolution
+        GetFrequencyConvolution(obj, matrix)
     end
 end

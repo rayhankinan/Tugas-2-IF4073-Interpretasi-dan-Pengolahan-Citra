@@ -1,0 +1,2 @@
+classdef FrequencyFilter
+end

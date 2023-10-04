@@ -14,6 +14,9 @@ classdef Convolution
             [imageHeight, imageWidth] = size(doubleImageData);
             [kernelHeight, kernelWidth] = size(kernel);
             
+            % Get the padding size
+            paddingSize = floor(kernelHeight / 2);
+            
             % Initialize the processed image data
             doubleImageDataProcessed = zeros(imageHeight, imageWidth);
             
@@ -26,8 +29,8 @@ classdef Convolution
                     for m = 1:kernelHeight
                         for n = 1:kernelWidth
                             % Initialize current index
-                            currI = i + m - 1;
-                            currJ = j + n - 1;
+                            currI = i + m - paddingSize - 1;
+                            currJ = j + n - paddingSize - 1;
                             
                             % Check if the element is in the image
                             if currI > 0 && currI <= imageHeight && currJ > 0 && currJ <= imageWidth
@@ -60,16 +63,19 @@ classdef Convolution
             % Get the data dimension
             [imageHeight, imageWidth] = size(doubleImageData);
             
+            % Get the padding size
+            paddingSize = floor(regionSize / 2);
+            
             % Initialize the processed image data
             doubleImageDataProcessed = zeros(imageHeight, imageWidth);
             
             for i = 1:imageHeight
                 for j = 1:imageWidth
                     % Get the dimension of the region
-                    rowStart = max(1, i - floor(regionSize / 2));
-                    rowEnd = min(imageHeight, i + floor(regionSize / 2));
-                    colStart = max(1, j - floor(regionSize / 2));
-                    colEnd = min(imageWidth, j + floor(regionSize / 2));
+                    rowStart = max(1, i - paddingSize);
+                    rowEnd = min(imageHeight, i + paddingSize);
+                    colStart = max(1, j - paddingSize);
+                    colEnd = min(imageWidth, j + paddingSize);
                     
                     % Get the region
                     regionMatrix = doubleImageData(rowStart:rowEnd, colStart:colEnd);
@@ -81,6 +87,22 @@ classdef Convolution
             
             % Convert to uint8
             resultData = im2uint8(doubleImageDataProcessed);
+        end
+        
+        function resultData = DoFrequencyConvolution(imageData, matrix)
+            arguments
+                imageData uint8
+                matrix double
+            end % arguments
+            
+            % Convert to frequency domain
+            freqImageData = fft2(imageData);
+            
+            % Apply the matrix
+            processedImageData = freqImageData .* matrix;
+            
+            % Convert to spatial domain
+            resultData = ifft2(processedImageData);
         end
     end
 end

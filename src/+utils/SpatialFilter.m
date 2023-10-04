@@ -2,7 +2,7 @@ classdef SpatialFilter
     methods (Static)
         function matrix = GenerateMeanFilter(size)
             arguments
-                size(1, 1) uint8 {mustBePositive, mustBeOdd}
+                size(1, 1) double {mustBePositive}
             end
             
             matrix = fspecial('average', size);
@@ -10,7 +10,7 @@ classdef SpatialFilter
         
         function matrix = GenerateGaussianFilter(size, sigma)
             arguments
-                size(1, 1) uint8 {mustBePositive, mustBeOdd}
+                size(1, 1) double {mustBePositive}
                 sigma(1, 1) double {mustBePositive}
             end
             
