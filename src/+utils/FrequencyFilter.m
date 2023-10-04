@@ -25,6 +25,17 @@ classdef FrequencyFilter
             matrix = double(D <= cutOffFrequency);
         end
         
+        function matrix = GenerateIdealHighPassFilter(width, height, cutOffFrequency)
+            arguments
+                width(1,1) double
+                height(1,1) double
+                cutOffFrequency(1,1) double
+            end % arguments
+            
+            % Generate the filter
+            matrix = 1 - utils.FrequencyFilter.GenerateIdealLowPassFilter(width, height, cutOffFrequency);
+        end
+        
         function matrix = GenerateGaussianLowPassFilter(width, height, cutOffFrequency)
             arguments
                 width(1,1) double
@@ -48,6 +59,17 @@ classdef FrequencyFilter
             
             % Generate the filter
             matrix = exp(-(D .^ 2) ./ (2 * cutOffFrequency ^ 2));
+        end
+        
+        function matrix = GenerateGaussianHighPassFilter(width, height, cutOffFrequency)
+            arguments
+                width(1,1) double
+                height(1,1) double
+                cutOffFrequency(1,1) double
+            end % arguments
+            
+            % Generate the filter
+            matrix = 1 - utils.FrequencyFilter.GenerateGaussianLowPassFilter(width, height, cutOffFrequency);
         end
         
         function matrix = GenerateButterworthLowPassFilter(width, height, cutOffFrequency, order)
@@ -74,6 +96,18 @@ classdef FrequencyFilter
             
             % Generate the filter
             matrix = 1 ./ (1 + (D ./ cutOffFrequency) .^ (2 * order));
+        end
+        
+        function matrix = GenerateButterworthHighPassFilter(width, height, cutOffFrequency, order)
+            arguments
+                width(1,1) double
+                height(1,1) double
+                cutOffFrequency(1,1) double
+                order(1,1) double
+            end % arguments
+            
+            % Generate the filter
+            matrix = 1 - utils.FrequencyFilter.GenerateButterworthLowPassFilter(width, height, cutOffFrequency, order);
         end
     end
 end
