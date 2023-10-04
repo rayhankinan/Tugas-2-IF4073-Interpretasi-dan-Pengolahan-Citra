@@ -84,7 +84,7 @@ classdef ColoredImageWrapper < wrappers.BaseImageWrapper
         function imageData = GetBrightening(obj, highpass, alpha)
             arguments
                 obj wrappers.ColoredImageWrapper
-                highpass double
+                highpass uint8
                 alpha(1, 1) double
             end % arguments
             
