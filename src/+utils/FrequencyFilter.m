@@ -109,5 +109,122 @@ classdef FrequencyFilter
             % Generate the filter
             matrix = 1 - utils.FrequencyFilter.GenerateButterworthLowPassFilter(width, height, cutOffFrequency, order);
         end
+
+        function matrix = GenerateIdealBandrejectFilter(width, height, cutOffFrequency, bandwidth)
+            arguments
+                width(1,1) double
+                height(1,1) double
+                cutOffFrequency(1,1) double
+                bandwidth(1,1) double
+            end % arguments
+            
+            % Set up range of frequencies
+            u = 0:height-1;
+            v = 0:width-1;
+            
+            % Compute the indices for use in meshgrid
+            idx = find(u > height/2);
+            u(idx) = u(idx) - height;
+            idy = find(v > width/2);
+            v(idy) = v(idy) - width;
+            
+            % Compute the meshgrid arrays
+            [V, U] = meshgrid(v, u);
+            D = sqrt(U.^2 + V.^2);
+            
+            % Generate the filter
+            matrix = double(D >= cutOffFrequency - bandwidth/2 & D <= cutOffFrequency + bandwidth/2);   
+        end
+
+        function matrix = GenerateButterworthBandrejectFilter(width, height, cutOffFrequency, bandwidth, order)
+            arguments
+                width(1,1) double
+                height(1,1) double
+                cutOffFrequency(1,1) double
+                bandwidth(1,1) double
+                order(1,1) double
+            end % arguments
+            
+            % Set up range of frequencies
+            u = 0:height-1;
+            v = 0:width-1;
+            
+            % Compute the indices for use in meshgrid
+            idx = find(u > height/2);
+            u(idx) = u(idx) - height;
+            idy = find(v > width/2);
+            v(idy) = v(idy) - width;
+            
+            % Compute the meshgrid arrays
+            [V, U] = meshgrid(v, u);
+            D = sqrt(U.^2 + V.^2);
+            
+            % Generate the butterworth bandreject filter
+            matrix = 1 ./ (1 + ((D .* bandwidth) ./ (D .^ 2 - cutOffFrequency ^ 2)) .^ (2 * order));
+        end
+
+        function matrix = GenerateGaussianBandrejectFilter(width, height, cutOffFrequency, bandwidth)
+            arguments
+                width(1,1) double
+                height(1,1) double
+                cutOffFrequency(1,1) double
+                bandwidth(1,1) double
+            end % arguments
+            
+            % Set up range of frequencies
+            u = 0:height-1;
+            v = 0:width-1;
+            
+            % Compute the indices for use in meshgrid
+            idx = find(u > height/2);
+            u(idx) = u(idx) - height;
+            idy = find(v > width/2);
+            v(idy) = v(idy) - width;
+            
+            % Compute the meshgrid arrays
+            [V, U] = meshgrid(v, u);
+            D = sqrt(U.^2 + V.^2);
+            
+            % Generate the gaussian bandreject filter
+            matrix = 1 - exp(-1/2 * ((D.^2 - cutOffFrequency^2) / (cutOffFrequency * bandwidth)).^2);
+        end
+
+        function matrix = GenerateIdealBandpassFilter(width, height, cutOffFrequency, bandwidth)
+            arguments
+                width(1,1) double
+                height(1,1) double
+                cutOffFrequency(1,1) double
+                bandwidth(1,1) double
+            end % arguments
+            
+            % Generate the filter
+            matrix = 1 - utils.FrequencyFilter.GenerateIdealBandrejectFilter(width, height, cutOffFrequency, bandwidth);
+        end
+
+        function matrix = GenerateButterworthBandpassFilter(width, height, cutOffFrequency, bandwidth, order)
+            arguments
+                width(1,1) double
+                height(1,1) double
+                cutOffFrequency(1,1) double
+                bandwidth(1,1) double
+                order(1,1) double
+            end % arguments
+            
+            % Generate the filter
+            matrix = 1 - utils.FrequencyFilter.GenerateButterworthBandrejectFilter(width, height, cutOffFrequency, bandwidth, order);
+        end
+
+        function matrix = GenerateGaussianBandpassFilter(width, height, cutOffFrequency, bandwidth)
+            arguments
+                width(1,1) double
+                height(1,1) double
+                cutOffFrequency(1,1) double
+                bandwidth(1,1) double
+            end % arguments
+            
+            % Generate the filter
+            matrix = 1 - utils.FrequencyFilter.GenerateGaussianBandrejectFilter(width, height, cutOffFrequency, bandwidth);
+        end
+        
     end
 end
