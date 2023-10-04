@@ -37,14 +37,28 @@ classdef ColoredImageWrapper < wrappers.BaseImageWrapper
             type = obj.Type;
         end
         
+        % Get Matrix Convolution
+        function imageData = GetMatrixConvolution(obj, matrix)
+            arguments
+                obj wrappers.ColoredImageWrapper
+                matrix double;
+            end % arguments
+            
+            redChan = utils.Convolution(obj.ImageData(:,:,1), matrix);
+            greenChan = utils.Convolution(obj.ImageData(:,:,2), matrix);
+            blueChan = utils.Convolution(obj.ImageData(:,:,3), matrix);
+            
+            imageData = cat(3, redChan, greenChan, blueChan);
+        end % function
+        
         % Get Brightened Image
         function imageData = GetBrightened(obj, value)
             arguments
                 obj wrappers.ColoredImageWrapper
                 value double;
-            end
+            end % arguments
             
             % TODO: Do something with the obj.ImageData
-        end
+        end % function
     end
 end
