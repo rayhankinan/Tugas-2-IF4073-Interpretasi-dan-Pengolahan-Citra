@@ -53,8 +53,8 @@ classdef Convolution
         function resultData = DoFunctionConvolution(imageData, lambda, regionSize)
             arguments
                 imageData uint8
-                lambda function_handle
-                regionSize uint8
+                lambda(1, 1) function_handle
+                regionSize(1, 1) uint8
             end % arguments
             
             % Convert to double

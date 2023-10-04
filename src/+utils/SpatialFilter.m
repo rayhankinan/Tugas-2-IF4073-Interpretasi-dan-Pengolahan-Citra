@@ -19,51 +19,67 @@ classdef SpatialFilter
         
         function result = HarmonicMean(matrix)
             arguments
-                matrix(:, :) double
+                matrix double
             end
             
-            %cari size matrix
+            % Cari size matrix
             [row, col] = size(matrix);
-
-            %cari nilai mean harmonic
+            
+            % Cari nilai mean harmonic
             result = (row * col) / sum(1 ./ matrix, 'all');
         end
-
+        
+        function lambda = GenerateMidpoint()
+            lambda = @(x) Midpoint(x);
+        end
+        
         function result = ContraharmonicMean(matrix)
             arguments
-                matrix(:, :) double
+                matrix double
             end
-
-            %cari nilai mean harmonic
+            
+            % Cari nilai mean harmonic
             result = sum(matrix .^ 2, 'all') / sum(matrix, 'all');
+        end
+        
+        function lambda = GenerateContraharmonicMean()
+            lambda = @(x) ContraharmonicMean(x);
         end
         
         function result = Midpoint(matrix)
             arguments
-                matrix(:, :) double
+                matrix double
             end
             
             result = (max(matrix, [], 'all') + min(matrix, [], 'all')) / 2;
         end
-
+        
+        function lambda = GenerateHarmonicMean()
+            lambda = @(x) HarmonicMean(x);
+        end
+        
         function result = AlphaTrimmedMean(matrix, d)
             arguments
-                matrix(:, :) double
+                matrix double
                 d(1, 1) double {mustBePositive}
             end
-
-            %sort matrix
+            
+            % Sort matrix
             matrix = sort(matrix, 'all');
-
-            %hilangkan d/2 nilai terkecil dan d/2 nilai terbesar
+            
+            % Hilangkan d/2 nilai terkecil dan d/2 nilai terbesar
             trimmedMatrix = matrix((d/2)+1:end-(d/2));
             
-            %cari nilai mean
+            % Cari nilai mean
             result = mean(trimmedMatrix, 'all');
         end
         
-        function f = GenerateAlphaTrimmedLambda(d)
-            f = @(x) AlphaTrimmedMean(x, d);
+        function lambda = GenerateAlphaTrimmedMean(d)
+            arguments
+                d(1, 1) double {mustBePositive}
+            end
+            
+            lambda = @(x) AlphaTrimmedMean(x, d);
         end
     end % methods
 end

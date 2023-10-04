@@ -55,8 +55,8 @@ classdef ColoredImageWrapper < wrappers.BaseImageWrapper
         function imageData = GetFunctionConvolution(obj, lambda, regionSize)
             arguments
                 obj wrappers.ColoredImageWrapper
-                lambda function_handle
-                regionSize uint8
+                lambda(1, 1) function_handle
+                regionSize(1, 1) uint8
             end % arguments
             
             redChan = utils.Convolution.DoFunctionConvolution(obj.ImageData(:,:,1), lambda, regionSize);
