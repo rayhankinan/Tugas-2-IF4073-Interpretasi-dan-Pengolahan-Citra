@@ -40,21 +40,22 @@ classdef GrayscaleImageWrapper < wrappers.BaseImageWrapper
         % Get Matrix Convolution
         function imageData = GetMatrixConvolution(obj, matrix)
             arguments
-                obj wrappers.ColoredImageWrapper
+                obj wrappers.GrayscaleImageWrapper
                 matrix double;
             end % arguments
             
-            imageData = utils.Convolution(obj.ImageData, matrix);
+            imageData = utils.Convolution.DoMatrixConvolution(obj.ImageData, matrix);
         end
         
-        % Get Brightened Image
-        function imageData = GetBrightened(obj, value)
+        % Get Function Convolution
+        function imageData = GetFunctionConvolution(obj, lambda, regionSize)
             arguments
                 obj wrappers.GrayscaleImageWrapper
-                value double;
-            end
+                lambda function_handle
+                regionSize uint8
+            end % arguments
             
-            % TODO: Do something with the obj.ImageData
+            imageData = utils.Convolution.DoFunctionConvolution(obj.ImageData, lambda, regionSize);
         end
     end
 end

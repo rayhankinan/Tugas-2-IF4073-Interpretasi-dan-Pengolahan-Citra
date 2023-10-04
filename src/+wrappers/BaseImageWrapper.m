@@ -14,10 +14,10 @@ classdef (Abstract) BaseImageWrapper
         % Get Image Type
         GetType(obj)
         
-        % Get matrix convolution
+        % Get Matrix Convolution
         GetMatrixConvolution(obj, matrix)
         
-        % Get Brightened Image
-        GetBrightened(obj, value)
+        % Get Function Convolution
+        GetFunctionConvolution(obj, lambda, regionSize)
     end
 end
