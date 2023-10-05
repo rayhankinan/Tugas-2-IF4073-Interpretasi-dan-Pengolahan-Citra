@@ -5,8 +5,8 @@ classdef (Abstract) BaseImageWrapper
     end
     
     methods
-        % Check if Image is empty
-        IsEmpty(obj)
+        % Get Image Size
+        GetSize(obj)
         
         % Get Image Data
         GetImageData(obj)

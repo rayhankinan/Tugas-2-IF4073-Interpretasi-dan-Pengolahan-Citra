@@ -10,13 +10,13 @@ classdef ColoredImageWrapper < wrappers.BaseImageWrapper
             obj.Type = 'color';
         end
         
-        % Check if Image is empty
-        function isEmpty = IsEmpty(obj)
+        % Get Image Size
+        function [imageHeight, imageWidth] = GetSize(obj)
             arguments
                 obj wrappers.ColoredImageWrapper
             end
             
-            isEmpty = isempty(obj.ImageData);
+            [imageHeight, imageWidth, ~] = size(obj.ImageData);
         end
         
         % Get Image Data
