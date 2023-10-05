@@ -76,7 +76,7 @@ classdef GrayscaleImageWrapper < wrappers.BaseImageWrapper
                 alpha(1, 1) double
             end % arguments
             
-            imageData =  utils.Brighten.GetHighBoostg(obj.ImageData, highpass, alpha);
+            imageData =  utils.Brighten.GetHighBoost(obj.ImageData, highpass, alpha);
         end
     end
 end
