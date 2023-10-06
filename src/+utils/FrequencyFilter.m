@@ -226,5 +226,18 @@ classdef FrequencyFilter
             matrix = 1 - utils.FrequencyFilter.GenerateGaussianBandrejectFilter(width, height, cutOffFrequency, bandwidth);
         end
         
+        function matrix = GenerateWienerFilter(width, height, psf, k)
+            arguments
+                width(1,1) double
+                height(1,1) double
+                psf double
+                k(1,1) double
+            end % arguments
+            
+            % Change to frequency domain
+            psfFreq = fft2(psf, height, width);
+            
+            matrix = conj(psfFreq) ./ (abs(psfFreq) .^ 2 + k);
+        end
     end
 end
