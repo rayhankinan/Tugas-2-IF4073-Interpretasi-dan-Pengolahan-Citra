@@ -109,7 +109,7 @@ classdef Convolution
             processedDoubleData = ifft2(processedImageData);
             
             % Convert to uint8
-            resultData = im2uint8(processedDoubleData);
+            resultData = im2uint8(real(processedDoubleData));
         end
     end
 end
