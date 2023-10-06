@@ -58,23 +58,17 @@ classdef SpatialFilter
             lambda = @(x) utils.SpatialFilter.HarmonicMean(x);
         end
         
-        function result = AlphaTrimmedMean(matrix)       
+        function result = AlphaTrimmedMean(matrix, d)       
             % Sort matrix
-            vectorized = reshape(matrix,1,[]);
-            d = 4;
+            vectorized = matrix(:);
+            
             sorted = sort(vectorized);
-            fprintf('%g',sorted)
-            b = d/2;
-            c = b+1;
-            d = numel(sorted) - b;
-            trimmed = sorted(c:d);
-            
-            result = mean(trimmed);
-            
+
+            trimmed = sorted(d+1:en 
         end
         
-        function lambda = GenerateAlphaTrimmedMean()
-            lambda = @(x) utils.SpatialFilter.AlphaTrimmedMean(x);
+        function lambda = GenerateAlphaTrimmedMean(d)
+            lambda = @(x) utils.SpatialFilter.AlphaTrimmedMean(x, d);
         end
 
         function lambda = GenerateMin()

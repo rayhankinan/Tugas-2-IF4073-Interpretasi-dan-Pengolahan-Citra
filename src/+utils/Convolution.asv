@@ -55,7 +55,7 @@ classdef Convolution
             arguments
                 imageData uint8
                 lambda(1, 1) function_handle
-                regionSize(1, 1) uint16
+                regionSize(1, 1) uint8
             end % arguments
             
             % Convert to double
@@ -70,15 +70,17 @@ classdef Convolution
             % Initialize the processed image data
             doubleImageDataProcessed = zeros(imageHeight, imageWidth);
 
-            fprintf("%d %d", imageHeight, imageWidth)
+            display(imageHeight)
+            display(imageWidth)
             
             for i = 1:imageHeight
                 for j = 1:imageWidth
                     % Get the dimension of the region
                     rowStart = max(1, i - paddingSize);
-                    rowEnd = min(imageHeight, i + paddingSize);
-                    colStart = max(1, j - paddingSize);
-                    colEnd = min(imageWidth, j + paddingSize);
+                    rowEnd = uint8(min(imageHeight, i + paddingSize));
+                    colStart =  j - paddingSize);
+                    colEnd =  j + paddingSize;
+                    
                     
                     % Get the region
                     regionMatrix = doubleImageData(rowStart:rowEnd, colStart:colEnd);
