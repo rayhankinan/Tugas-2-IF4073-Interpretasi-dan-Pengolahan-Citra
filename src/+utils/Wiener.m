@@ -1,10 +1,6 @@
 classdef Wiener
     methods (Static)
         function deconvolved_image = WienerDeconvolution(blurred_image, psf, K)
-            % blurred_image: image blur
-            % psf: Point Spread Function
-            % noise : Noise additive
-            
             % ubah ke double precision
             blurred_image = im2double(blurred_image);
             psf = im2double(psf);
