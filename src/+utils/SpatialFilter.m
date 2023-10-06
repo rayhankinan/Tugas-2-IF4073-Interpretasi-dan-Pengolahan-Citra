@@ -63,7 +63,6 @@ classdef SpatialFilter
             vectorized = reshape(matrix,1,[]);
             d = 4;
             sorted = sort(vectorized);
-            fprintf('%g',sorted)
             b = d/2;
             c = b+1;
             d = numel(sorted) - b;
