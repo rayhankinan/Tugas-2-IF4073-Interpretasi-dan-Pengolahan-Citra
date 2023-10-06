@@ -55,7 +55,7 @@ classdef Convolution
             arguments
                 imageData uint8
                 lambda(1, 1) function_handle
-                regionSize(1, 1) uint16
+                regionSize(1, 1) double
             end % arguments
             
             % Convert to double
@@ -65,7 +65,7 @@ classdef Convolution
             [imageHeight, imageWidth] = size(doubleImageData);
             
             % Get the padding size
-            paddingSize = floor(regionSize / 2);
+            lowPaddingSize = floor(regionSize / 2);
             
             % Initialize the processed image data
             doubleImageDataProcessed = zeros(imageHeight, imageWidth);
@@ -73,10 +73,10 @@ classdef Convolution
             for i = 1:imageHeight
                 for j = 1:imageWidth
                     % Get the dimension of the region
-                    rowStart = max(1, i - paddingSize);
-                    rowEnd = min(imageHeight, i + paddingSize);
-                    colStart = max(1, j - paddingSize);
-                    colEnd = min(imageWidth, j + paddingSize);
+                    rowStart = max(1, i - lowPaddingSize);
+                    rowEnd = min(imageHeight, i + lowPaddingSize);
+                    colStart = max(1, j - lowPaddingSize);
+                    colEnd = min(imageWidth, j + lowPaddingSize);
                     
                     % Get the region
                     regionMatrix = doubleImageData(rowStart:rowEnd, colStart:colEnd);
