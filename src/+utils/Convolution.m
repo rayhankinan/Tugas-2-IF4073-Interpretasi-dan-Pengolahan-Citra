@@ -69,8 +69,6 @@ classdef Convolution
             
             % Initialize the processed image data
             doubleImageDataProcessed = zeros(imageHeight, imageWidth);
-
-            fprintf("%d %d", imageHeight, imageWidth)
             
             for i = 1:imageHeight
                 for j = 1:imageWidth
@@ -84,7 +82,6 @@ classdef Convolution
                     regionMatrix = doubleImageData(rowStart:rowEnd, colStart:colEnd);
                     
                     % Set the processed image data
-                    
                     doubleImageDataProcessed(i, j) = lambda(regionMatrix);
                 end % for j
             end % for i
@@ -92,8 +89,6 @@ classdef Convolution
             % Convert to uint8
             resultData = im2uint8(doubleImageDataProcessed);
         end
-
-        
         
         function resultData = DoFrequencyConvolution(imageData, matrix)
             arguments
